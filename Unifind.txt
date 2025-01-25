@@ -1,0 +1,54 @@
+const universities = [
+    {
+        name: 'Harvard University',
+        acceptanceRate: '4.6%',
+        requirements: 'SAT/ACT, TOEFL for international students, Letters of Recommendation',
+        location: 'Cambridge, MA',
+        website: 'https://www.harvard.edu'
+    },
+    {
+        name: 'Stanford University',
+        acceptanceRate: '4.3%',
+        requirements: 'SAT/ACT, TOEFL for international students, Letters of Recommendation',
+        location: 'Stanford, CA',
+        website: 'https://www.stanford.edu'
+    },
+    {
+        name: 'Massachusetts Institute of Technology',
+        acceptanceRate: '6.7%',
+        requirements: 'SAT/ACT, TOEFL for international students, Letters of Recommendation',
+        location: 'Cambridge, MA',
+        website: 'https://www.mit.edu'
+    }
+    // Add more universities as needed
+];
+
+const universityList = document.getElementById('universityList');
+const searchBar = document.getElementById('searchBar');
+
+function displayUniversities(universities) {
+    universityList.innerHTML = '';
+    universities.forEach(university => {
+        const universityDiv = document.createElement('div');
+        universityDiv.classList.add('university');
+        universityDiv.innerHTML = `
+            <h2>${university.name}</h2>
+            <p><strong>Location:</strong> ${university.location}</p>
+            <p><strong>Acceptance Rate:</strong> ${university.acceptanceRate}</p>
+            <p><strong>Requirements:</strong> ${university.requirements}</p>
+            <p><a href="${university.website}" target="_blank">Visit Website</a></p>
+        `;
+        universityList.appendChild(universityDiv);
+    });
+}
+
+searchBar.addEventListener('keyup', (e) => {
+    const searchString = e.target.value.toLowerCase();
+    const filteredUniversities = universities.filter(university => {
+        return university.name.toLowerCase().includes(searchString);
+    });
+    displayUniversities(filteredUniversities);
+});
+
+// Initial display
+displayUniversities(universities);
